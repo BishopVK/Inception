@@ -12,11 +12,31 @@ VIRTUAL MACHINE INSTALATION:
 
 
 DEBIAN INITIALIZATION:
-1. Update:		sudo apt update
+1. Update:		sudo apt update && sudo apt upgrade
 2. Add user "danjimen" to sudo group:
-	-	Switch to root:								su -
-	-	Add danjimen to sudo group:					usermod -aG sudo danjimen
-	-	Check if the changes were successful:		su - danjimen
-													sudo whoami (must return root)
+	-	Switch to root:
+			su -
+	-	Add danjimen to sudo group:
+			usermod -aG sudo danjimen
+	-	Check if the changes were successful:
+			su - danjimen
+			sudo whoami (must return root)
 	-	Reboot VM
 
+INSTALL GIT:
+1.1. Install:
+	sudo apt install git -y
+1.2. Verify install:
+	git --version
+
+2.1. Update Github identity:
+	git config --global user.name danjimen
+	git config --global user.email danjimen@student.42madrid.com
+
+3.1. Generate SSH key:
+	ssh-keygen -t ed25519 -C danjimen@student.42madrid.com
+3.2. Copy public key:
+	cat ~/.ssh/id_ed25519.pub
+3.3. Paste key in GitHub SSH Keys section
+3.4. Clone repository:
+	git clone git@github.com:BishopVK/Inception.git
