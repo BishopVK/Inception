@@ -66,3 +66,6 @@ INSTALL DOCKER:
 
 	# Verify that the installation is successful
 	sudo docker run hello-world
+2. Add user to docker group
+	sudo adduser danjimen docker
+3. Reboot VM
