@@ -40,3 +40,5 @@ INSTALL GIT:
 3.3. Paste key in GitHub SSH Keys section
 3.4. Clone repository:
 	git clone git@github.com:BishopVK/Inception.git
+3.5. Verify SSH conexion:
+	ssh -T git@github.com
