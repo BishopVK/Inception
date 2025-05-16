@@ -1,0 +1,20 @@
+VIRTUAL MACHINE INSTALATION:
+1. Install in: sgoinfree
+
+2. Install config:
+  -  Hostname:          Inception
+  -  Domain name:       danjimen.42.fr
+  -  Username:          danjimen
+  -  Password:          Inception42
+  -  Base memory:       2048 MB
+  -  Processors:        1 CPU
+  -  Virtual Hard Disk: 20.00 GB
+
+
+DEBIAN INITIALIZATION:
+1. Update:    sudo apt update
+2. Add user "danjimen" to sudo group:
+  -  Switch to root:                          su -
+  -  Add danjimen to sudo group:              usermod -aG sudo danjimen
+  -  Check if the changes were successful:    su - danjimen
+                                              sudo whoami (must return root)
