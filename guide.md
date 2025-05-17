@@ -1,52 +1,58 @@
-VIRTUAL MACHINE INSTALATION:
-1. Install in: sgoinfree
+# VIRTUAL MACHINE INSTALATION:
+## 1.	Install in:
+	sgoinfree
 
-2. Install config:
-	-	Hostname:				Inception
-	-	Domain name:			danjimen.42.fr
-	-	Username:				danjimen
-	-	Password:				Inception42
-	-	Base memory:			2048 MB
-	-	Processors:				1 CPU
-	-	Virtual Hard Disk:		20.00 GB
-
-
-DEBIAN INITIALIZATION:
-1. Update:		sudo apt update && sudo apt upgrade
-2. Add user "danjimen" to sudo group:
-	-	Switch to root:
-			su -
-	-	Add danjimen to sudo group:
-			usermod -aG sudo danjimen
-	-	Check if the changes were successful:
-			su - danjimen
-			sudo whoami (must return root)
-	-	Reboot VM
+## 2.	Install config:
+	Hostname:				Inception
+	Domain name:			danjimen.42.fr
+	Username:				danjimen
+	Password:				Inception42
+	Base memory:			2048 MB
+	Processors:				1 CPU
+	Virtual Hard Disk:		20.00 GB
 
 
-INSTALL GIT:
-1.1. Install:
+# DEBIAN INITIALIZATION:
+## 1.	Update:
+	sudo apt update && sudo apt upgrade
+
+## 2.	Add user "danjimen" to sudo group:
+**Switch to root:**
+-	su -
+
+**Add danjimen to sudo group:**
+-	usermod -aG sudo danjimen
+
+**Check if the changes were successful:**
+-	su - danjimen
+-	sudo whoami (must return root)
+
+**Reboot VM**
+
+
+# INSTALL GIT:
+## 1.1. Install:
 	sudo apt install git -y
-1.2. Verify install:
+## 1.2. Verify install:
 	git --version
 
-2.1. Update Github identity:
+## 2.1. Update Github identity:
 	git config --global user.name danjimen
 	git config --global user.email danjimen@student.42madrid.com
 
-3.1. Generate SSH key:
+## 3.1. Generate SSH key:
 	ssh-keygen -t ed25519 -C danjimen@student.42madrid.com
-3.2. Copy public key:
+## 3.2. Copy public key:
 	cat ~/.ssh/id_ed25519.pub
-3.3. Paste key in GitHub SSH Keys section
-3.4. Clone repository:
+## 3.3. Paste key in GitHub SSH Keys section
+## 3.4. Clone repository:
 	git clone git@github.com:BishopVK/Inception.git
-3.5. Verify SSH conexion:
+## 3.5. Verify SSH conexion:
 	ssh -T git@github.com
 
 
-INSTALL DOCKER:
-1. Follow docs.docker.com steps for install debian docker:
+# INSTALL DOCKER:
+## 1. Follow docs.docker.com steps for install debian docker:
 	# Add Docker's official GPG key:
 	sudo apt-get update
 	sudo apt-get install ca-certificates curl
@@ -66,6 +72,6 @@ INSTALL DOCKER:
 
 	# Verify that the installation is successful
 	sudo docker run hello-world
-2. Add user to docker group
+##	2. Add user to docker group
 	sudo adduser danjimen docker
-3. Reboot VM
+##	3. Reboot VM
