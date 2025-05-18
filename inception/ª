@@ -1,0 +1,19 @@
+#Makefile
+
+include ./srcs/.env
+
+NAME	=	nginx
+
+build:
+	docker build -t $(NAME) /srcs/requirements/nginx
+
+run:
+	docker run -d -p $(NGINX_PORT):80 --name $(NAME) $(NAME)
+
+stop:
+	docker stop $(NAME)
+
+rm:
+	docker rm $(NAME)
+
+re: stop rm build run
