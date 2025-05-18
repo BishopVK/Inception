@@ -75,3 +75,75 @@
 ##	2. Add user to docker group
 	sudo adduser danjimen docker
 ##	3. Reboot VM
+
+
+# CREATE FOLDER STRUCTURE
+	mkdir -p inception/srcs/requirements/{nginx,wordpress,mariadb}
+	touch inception/Makefile
+	touch inception/srcs/{.env,docker-compose-yml}
+	touch inception/srcs/requirements/nginx/Dockerfile
+	touch inception/srcs/requirements/wordpress/Dockerfile
+	touch inception/srcs/requirements/mariadb/Dockerfile
+
+
+# ADD NGINX CONTAINER
+
+## 1. srcs/.env
+	NGINX_PORT=443
+	DOMAIN_NAME=danjimen.42.fr
+
+## 2. srcs/requirements/nginx/Dockerfile
+	FROM debian:bullseye
+
+	RUN apt-get update && \
+		apt-get install -y nginx openssl && \
+		apt-get clean
+
+	EXPOSE 443
+
+	CMD ["nginx", "-g", "daemon off;"]
+
+## 3. srcs/docker-compose.yml
+	version: "3.8"
+
+	services:
+	nginx:
+		build:
+		context: ./requirements/nginx
+		container_name: nginx
+		ports:
+		- "${NGINX_PORT}:443"
+		restart: always
+		networks:
+		- inception
+		volumes:
+		- nginx_data:/var/www/html
+
+	volumes:
+	nginx_data:
+
+	networks:
+	inception:
+		driver: bridge
+
+## 4. Makefile
+	# Makefile
+
+	NAME=inception
+
+	up:
+		docker compose -f srcs/docker-compose.yml up -d --build
+
+	down:
+		docker compose -f srcs/docker-compose.yml down
+
+	logs:
+		docker compose -f srcs/docker-compose.yml logs -f
+
+	re: down up
+
+## 5. TESTING
+### Start the NGINX container
+	make up
+### Shutdown and remove the NGINX container
+	make down
