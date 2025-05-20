@@ -30,6 +30,27 @@
 **Reboot VM**
 
 
+# INSTALL AND CONNECT VIA SSH
+## 1. Install:
+	sudo apt install openssh-server
+
+## 2.1 Check if it is available and start
+	sudo systemctl enable ssh
+	sudo systemctl start ssh
+## 2.2 Verify status
+	sudo systemctl status ssh
+
+## 3. Check port forwarding in VirtualBox
+	VirtualBox > Settings > Network > Adapter 1 > Advanced > Port forwading:
+
+	| Nombre | Protocolo | IP anfitrión | Puerto anfitrión | IP invitado | Puerto invitado |
+	| ------ | --------- | ------------ | ---------------- | ----------- | --------------- |
+	| SSH    | TCP       | vacío        | 2222             | vacío       | 22              |
+
+## 4. Connect from the host
+	ssh danjimen@localhost -p 2222
+
+
 # INSTALL GIT:
 ## 1.1. Install:
 	sudo apt install git -y
