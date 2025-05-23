@@ -123,7 +123,7 @@
 >
 	FROM debian:bullseye		Usamos Debian minimalista como base
 	RUN apt-get update ...		Instalamos nginx en la imagen y limpiamos
-	EXPOSE 80					Declara el puerto 80 como el que va a exponer nginx
+	EXPOSE 443					Declara el puerto 80 como el que va a exponer nginx
 								(no lo abre en el host)
 	CMD ...						Ejecuta nginx en primer plano (daemon off)
 								para que el contenedor se mantenga vivo
