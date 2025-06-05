@@ -11,7 +11,7 @@ services:
     networks:
       - inception
     volumes:
-      - nginx_data:/var/www/html
+      #- nginx_data:/var/www/html
 
 volumes:
   nginx_data:
