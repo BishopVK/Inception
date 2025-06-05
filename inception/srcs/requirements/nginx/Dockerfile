@@ -15,6 +15,9 @@ COPY conf/default.conf /etc/nginx/sites-available/default
 RUN chmod +x /tmp/generate_certs.sh && \
 	/tmp/generate_certs.sh
 
+RUN chmod -R 755 /var/www/html
+RUN chown -R www-data:www-data /var/www/html
+
 # Declaramos el puerto que usará nginx (sólo informativo)
 EXPOSE 443
 
