@@ -10,7 +10,7 @@ services:
     restart: always
     networks:
       - inception
-    volumes:
+    # volumes:
       #- nginx_data:/var/www/html
 
 volumes:
