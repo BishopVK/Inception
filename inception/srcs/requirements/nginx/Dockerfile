@@ -3,8 +3,16 @@ FROM debian:bullseye
 
 # Instalamos nginx y limpiamos cache
 RUN	apt-get update && \
-	apt-get install -y nginx && \
+	apt-get install -y nginx openssl && \
 	apt-get clean
+
+# Copiar el script y el archivo de configuración
+COPY tools/generate_certs.sh /tmp/generate_certs.sh
+COPY conf/default.conf /etc/nginx/sites-available/default
+
+# Dar permisos de ejecución al script y ejecutarlo
+RUN chmod +x /tmp/generate_certs.sh && \
+	/tmp/generate_certs.sh
 
 # Declaramos el puerto que usará nginx (sólo informativo)
 EXPOSE 443
