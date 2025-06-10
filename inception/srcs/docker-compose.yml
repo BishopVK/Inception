@@ -8,11 +8,11 @@ services:
     ports:
       - "${NGINX_PORT}:443"
     restart: always
-    networks:
-      - inception
-    volumes:
-      # - nginx_data:/var/www/html  # Comentado, puedes activar si usas volumen nombrado
-      - ./requirements/nginx/html:/var/www/html
+networks:
+  - inception
+volumes:
+  # - nginx_data:/var/www/html  # Comentado, puedes activar si usas volumen nombrado
+  - ./requirements/nginx/html:/var/www/html
 
   #volumes:
   #  nginx_data:
