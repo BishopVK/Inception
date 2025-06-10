@@ -1,22 +1,22 @@
 version: "3.8"
 
 services:
-  nginx:
-    build:
-      context:  ./requirements/nginx
-    container_name: nginx
-    ports:
-      - "${NGINX_PORT}:443"
-    restart: always
-    networks:
-      - inception
-    volumes:
-      #- nginx_data:/var/www/html
-      - ./requirements/nginx/html:/var/www/html
+	nginx:
+		build:
+		context:  ./requirements/nginx
+		container_name: nginx
+		ports:
+		- "${NGINX_PORT}:443"
+		restart: always
+		networks:
+		- inception
+		volumes:
+		#- nginx_data:/var/www/html
+		- ./requirements/nginx/html:/var/www/html
 
-#volumes:
-#  nginx_data:
+	#volumes:
+	#  nginx_data:
 
-networks:
-  inception:
-    driver: bridge
+	networks:
+	inception:
+		driver: bridge
