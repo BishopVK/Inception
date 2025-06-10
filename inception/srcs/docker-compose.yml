@@ -11,7 +11,6 @@ services:
 networks:
   - inception
 volumes:
-# - nginx_data:/var/www/html  # Comentado, puedes activar si usas volumen nombrado
   - ./requirements/nginx/html:/var/www/html
 
   #volumes:
