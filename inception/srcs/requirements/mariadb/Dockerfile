@@ -9,7 +9,7 @@ RUN apt-get update -y && \
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY ../.env /etc/mysql/.env
+COPY .env /etc/mysql/.env
 
 COPY ./tools/init.sql /etc/mysql/init.temp.sql
 COPY ./tools/substitute_env_vars.sh /usr/local/bin/substitute_env_vars.sh
