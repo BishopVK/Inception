@@ -2,17 +2,32 @@ version: "3.8"
 
 services:
   nginx:
+    container_name:
+      nginx
     build:
       context: ./requirements/nginx
-    container_name: nginx
-    ports:
-      - "${NGINX_PORT}:443"
-    restart: always
-    networks:
-      - inception
     volumes:
       # - nginx_data:/var/www/html  # Comentado, puedes activar si usas volumen nombrado
       - ./requirements/nginx/html:/var/www/html
+    ports:
+      - "${NGINX_PORT}:443"
+    networks:
+      - inception
+    restart: always
+
+  mariadb:
+    container_name:
+      mariadb
+    build:
+      context: ./requirements/mariadb
+    volumes:
+      # - nginx_data:/var/www/html  # Comentado, puedes activar si usas volumen nombrado
+      - ./requirements/nginx/html:/var/www/html
+    networks:
+      - inception
+    env_file:
+      - .env
+    restart: always
 
 networks:
   inception:
