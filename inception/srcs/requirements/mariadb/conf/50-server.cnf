@@ -6,17 +6,20 @@
 [server]
 
 # this is only for the mariadbd daemon
-[mariadbd]
+#[mariadbd]
+
+# this is only for the mysqld standalone daemon
+[mysqld]
 
 #
 # * Basic Settings
 #
 
-#user                    = mysql
+user                    = root
 pid-file                = /run/mysqld/mysqld.pid
 basedir                 = /usr
-#datadir                 = /var/lib/mysql
-#tmpdir                  = /tmp
+datadir                 = /var/lib/mysql
+tmpdir                  = /tmp
 
 # Broken reverse DNS slows down connections considerably and name resolve is
 # safe to skip if there are no "host by domain name" access grants
@@ -25,6 +28,7 @@ basedir                 = /usr
 # Instead of skip-networking the default is now to listen only on
 # localhost which is more compatible and is not less secure.
 #bind-address            = 127.0.0.1
+bind-address            = mariadb
 
 #
 # * Fine Tuning
