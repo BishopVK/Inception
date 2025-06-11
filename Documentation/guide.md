@@ -214,7 +214,37 @@
 		}
 	}
 
-## 3. Copy configuration and script, and exectuting script to nginx dockerfile
+## 3. Create nginx index.html
+### Create folder structure
+	nginx
+	└── html/
+		└── index.html
+
+### Create index.html
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Inception Nginx</title>
+		<style>
+			body{
+				color: white;
+				background-color: #2b2b2b;
+				min-width: 100%;
+				min-height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-family: sans-serif;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 style="font-size: 3rem;">Hola desde Nginx de danjimen en Docker!</h1>
+	</body>
+	</html>
+
+## 4. Copy configuration and script, and exectuting script to nginx dockerfile
 	# Copiar el script y el archivo de configuración
 	COPY tools/generate_certs.sh /tmp/generate_certs.sh
 	COPY html/index.html /var/www/html/index.html
@@ -227,7 +257,7 @@
 	RUN chmod -R 755 /var/www/html
 	RUN chown -R www-data:www-data /var/www/html
 
-## 4. Updating docker-compose.yml
+## 5. Updating docker-compose.yml
 ### Remove creation of volume lines:
 	volumes:
 	  nginx_data:
