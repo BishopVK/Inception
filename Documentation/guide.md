@@ -168,3 +168,71 @@
 	make up
 ### Shutdown and remove the NGINX container
 	make down
+
+
+# ADD SSL CERTIFICATION TO NGINX
+
+## 1. Create script to generate certs
+### Create folder structure
+	nginx
+	└── docs/
+		└── generate_certs.sh
+
+### Create generate_certs.sh
+	#!/bin/bash
+
+	mkdir -p /etc/nginx/ssl
+
+	openssl req -x509 -nodes -days 365 \
+		-subj "/C=ES/ST=Madrid/L=Madrid/O=Inception/CN=localhost" \
+		-newkey rsa:2048 \
+		-keyout /etc/nginx/ssl/nginx.key \
+		-out /etc/nginx/ssl/nginx.crt
+
+## 2. Create nginx ssl configuration
+### Create folder structure
+	nginx
+	└── conf/
+		└── default.conf
+
+### Create default.conf
+	server {
+		listen 443 ssl;
+		server_name localhost;
+
+		ssl_certificate /etc/nginx/ssl/nginx.crt;
+		ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+		ssl_protocols TLSv1.2 TLSv1.3;
+		ssl_ciphers HIGH:!aNULL:!MD5;
+
+		root /var/www/html;
+		index index.html;
+
+		location / {
+			try_files $uri $uri/ =404;
+		}
+	}
+
+## 3. Copy configuration and script, and exectuting script to nginx dockerfile
+	# Copiar el script y el archivo de configuración
+	COPY tools/generate_certs.sh /tmp/generate_certs.sh
+	COPY html/index.html /var/www/html/index.html
+	COPY conf/default.conf /etc/nginx/sites-available/default
+
+	# Dar permisos de ejecución al script y ejecutarlo
+	RUN chmod +x /tmp/generate_certs.sh && \
+		/tmp/generate_certs.sh
+
+	RUN chmod -R 755 /var/www/html
+	RUN chown -R www-data:www-data /var/www/html
+
+## 4. Updating docker-compose.yml
+### Remove creation of volume lines:
+	volumes:
+	  nginx_data:
+
+### Update volume to copy only html in bind mode
+	volumes:
+      # - nginx_data:/var/www/html  # Commented. Can be enabled if the named volume is used
+      - ./requirements/nginx/html:/var/www/html
