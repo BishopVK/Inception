@@ -2,7 +2,8 @@
 FROM debian:bullseye
 
 # Instalamos nginx y limpiamos cache
-RUN	apt-get update && \
+RUN	apt-get update -y && \
+	apt-get upgrade -y && \
 	apt-get install -y nginx openssl && \
 	apt-get clean
 

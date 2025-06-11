@@ -2,7 +2,8 @@
 FROM debian:bullseye
 
 # Instalamos MariaDB y limpiamos cache
-RUN apt-get update && \
+RUN apt-get update -y && \
+	apt-get upgrade -y && \
 	apt install mariadb-server -y && \
 	apt-get clean
 
