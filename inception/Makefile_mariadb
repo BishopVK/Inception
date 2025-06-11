@@ -1,0 +1,19 @@
+#Makefile
+
+include ./srcs/.env
+
+NAME	=	mariadb
+
+build:
+	docker build -t $(NAME) /srcs/requirements/mariadb
+
+run:
+	docker run -d -p $(MARIADB_PORT):3306 --name $(NAME) $(NAME)
+
+stop:
+	docker stop $(NAME)
+
+rm:
+	docker rm $(NAME)
+
+re: stop rm build run
