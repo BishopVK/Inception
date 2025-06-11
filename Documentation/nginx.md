@@ -56,21 +56,21 @@
 		apt-get clean
 
 	# Declaramos el puerto que usará nginx (solo informativo)
-	EXPOSE 80
+	EXPOSE 443
 
 	# Comando que se ejecutará cuando el contenedor arranca
 	CMD ["nginx", "-g", "daemon off;"]
 >
 	FROM debian:bullseye		Usamos Debian minimalista como base
 	RUN apt-get update ...		Instalamos nginx en la imagen y limpiamos
-	EXPOSE 80					Declara el puerto 80 como el que va a exponer nginx
+	EXPOSE 443					Declara el puerto 443 como el que va a exponer nginx
 								(no lo abre en el host)
 	CMD ...						Ejecuta nginx en primer plano (daemon off)
 								para que el contenedor se mantenga vivo
 
 ## CREAR .env
 ### Definimos una variable que podremos usar en Makefile o docker-compose
-	NGINX_PORT=8080
+	NGINX_PORT=443
 
 ## CREAR Makefile
 	include .env
