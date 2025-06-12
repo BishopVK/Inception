@@ -4,8 +4,8 @@ FROM debian:bullseye
 RUN	apt-get update -y && \
 	apt-get upgrade -y && \
 	apt-get install -y \
-		php7.3-fpm \
-		php7.3-mysqli \
+		php7.4-fpm \
+		php7.4-mysqli \
 		curl \
 		mariadb-client \
 		wget \
