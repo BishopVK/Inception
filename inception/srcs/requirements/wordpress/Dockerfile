@@ -3,7 +3,7 @@ FROM debian:bullseye
 
 RUN	apt-get update -y && \
 	apt-get upgrade -y && \
-	apt install -y \
+	apt-get install -y \
 		php7.3-fpm \
 		php7.3-mysqli \
 		curl \
