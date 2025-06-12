@@ -1,14 +1,13 @@
 make
 docker compose -f srcs/docker-compose.yml up -d --build
-WARN[0000] /home/danjimen/repo/inception/srcs/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
 Compose can now delegate builds to bake for better performance.
  To do so, set COMPOSE_BAKE=true.
-[+] Building 0.7s (27/27) FINISHED                               docker:default
+[+] Building 0.9s (27/27) FINISHED                               docker:default
  => [mariadb internal] load build definition from Dockerfile               0.0s
  => => transferring dockerfile: 856B                                       0.0s
+ => [mariadb internal] load metadata for docker.io/library/debian:bullsey  0.7s
  => [nginx internal] load build definition from Dockerfile                 0.0s
  => => transferring dockerfile: 793B                                       0.0s
- => [mariadb internal] load metadata for docker.io/library/debian:bullsey  0.3s
  => [mariadb internal] load .dockerignore                                  0.0s
  => => transferring context: 2B                                            0.0s
  => [nginx internal] load .dockerignore                                    0.0s
@@ -26,10 +25,6 @@ Compose can now delegate builds to bake for better performance.
  => CACHED [mariadb 7/9] COPY ./tools/mariadb_setup.sh .                   0.0s
  => CACHED [mariadb 8/9] RUN chmod +x /usr/local/bin/*.sh                  0.0s
  => CACHED [mariadb 9/9] RUN mkdir /run/mysqld                             0.0s
- => [mariadb] exporting to image                                           0.0s
- => => exporting layers                                                    0.0s
- => => writing image sha256:91e0806c56049a01f92d1d1ebb388bb95d57b98449ff2  0.0s
- => => naming to docker.io/library/srcs-mariadb                            0.0s
  => CACHED [nginx 2/8] RUN APT-GET update -y &&  apt-get upgrade -y &&  a  0.0s
  => CACHED [nginx 3/8] COPY tools/generate_certs.sh /tmp/generate_certs.s  0.0s
  => CACHED [nginx 4/8] COPY html/index.html /var/www/html/index.html       0.0s
@@ -37,16 +32,21 @@ Compose can now delegate builds to bake for better performance.
  => CACHED [nginx 6/8] RUN chmod +x /tmp/generate_certs.sh &&  /tmp/gener  0.0s
  => CACHED [nginx 7/8] RUN chmod -R 755 /var/www/html                      0.0s
  => CACHED [nginx 8/8] RUN chown -R www-data:www-data /var/www/html        0.0s
+ => [mariadb] exporting to image                                           0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:91e0806c56049a01f92d1d1ebb388bb95d57b98449ff2  0.0s
+ => => naming to docker.io/library/srcs-mariadb                            0.0s
  => [nginx] exporting to image                                             0.0s
  => => exporting layers                                                    0.0s
  => => writing image sha256:0bd293c92458ac7184560e1c9774a500058ce3d46f839  0.0s
  => => naming to docker.io/library/srcs-nginx                              0.0s
  => [mariadb] resolving provenance for metadata file                       0.0s
  => [nginx] resolving provenance for metadata file                         0.0s
-[+] Running 3/4
- ✔ mariadb            Built                                                0.0s 
- ✔ nginx              Built                                                0.0s 
- ⠏ Container mariadb  Starting                                             0.9s 
- ✔ Container nginx    Started                                              0.8s 
+[+] Running 4/5
+ ✔ mariadb                 Built                                           0.0s 
+ ✔ nginx                   Built                                           0.0s 
+ ✔ Network srcs_inception  Created                                         0.2s 
+ ⠼ Container mariadb       Starting                                        0.4s 
+ ✔ Container nginx         Started                                         0.4s 
 Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: exec: "/usr/local/bin/mariadb_setup.sh": stat /usr/local/bin/mariadb_setup.sh: no such file or directory: unknown
 make: *** [Makefile:6: up] Error 1
