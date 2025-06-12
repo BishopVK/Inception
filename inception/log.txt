@@ -1,4 +1,4 @@
-✔ mariadb                 Built                                                                                                                       0.0s 
+ ✔ mariadb                 Built                                                                                                                       0.0s 
  ✔ nginx                   Built                                                                                                                       0.0s 
  ✔ wordpress               Built                                                                                                                       0.0s 
  ✔ Network srcs_inception  Created                                                                                                                     0.1s 
@@ -7,42 +7,63 @@
  ✔ Container nginx         Started                                                                                                                     0.9s 
 danjimen@Inception:~/repo/inception$ docker ps
 CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                     NAMES
-6a84277ad4bc   srcs-nginx       "nginx -g 'daemon of…"   6 seconds ago   Up 4 seconds   0.0.0.0:443->443/tcp, [::]:443->443/tcp   nginx
-71ef6035e773   srcs-wordpress   "bash /usr/local/bin…"   6 seconds ago   Up 5 seconds   9000/tcp                                  wordpress
-d1ebebad165e   srcs-mariadb     "/usr/local/bin/mari…"   6 seconds ago   Up 5 seconds   3306/tcp                                  mariadb
+cb4267bf461c   srcs-nginx       "nginx -g 'daemon of…"   3 seconds ago   Up 2 seconds   0.0.0.0:443->443/tcp, [::]:443->443/tcp   nginx
+cb05e6be9ebf   srcs-wordpress   "bash /usr/local/bin…"   3 seconds ago   Up 3 seconds   9000/tcp                                  wordpress
+39da7a095d08   srcs-mariadb     "/usr/local/bin/mari…"   3 seconds ago   Up 3 seconds   3306/tcp                                  mariadb
+danjimen@Inception:~/repo/inception$ docker logs nginx
 danjimen@Inception:~/repo/inception$ docker logs mariadb
-2025-06-12 23:25:17 0 [Note] Starting MariaDB 10.5.29-MariaDB-0+deb11u1 source revision c461188ca6ad6ec3a54201eb87ebd75797d296df server_uid iZSJBvcnfVw3xddECxjlxl0E4/g= as process 1
-2025-06-12 23:25:17 0 [Note] InnoDB: Uses event mutexes
-2025-06-12 23:25:17 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
-2025-06-12 23:25:17 0 [Note] InnoDB: Number of pools: 1
-2025-06-12 23:25:17 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
-2025-06-12 23:25:17 0 [Note] mysqld: O_TMPFILE is not supported on /tmp (disabling future attempts)
-2025-06-12 23:25:17 0 [Note] InnoDB: Using Linux native AIO
-2025-06-12 23:25:17 0 [Note] InnoDB: Initializing buffer pool, total size = 134217728, chunk size = 134217728
-2025-06-12 23:25:17 0 [Note] InnoDB: Completed initialization of buffer pool
-2025-06-12 23:25:17 0 [Note] InnoDB: 128 rollback segments are active.
-2025-06-12 23:25:17 0 [Note] InnoDB: Creating shared tablespace for temporary tables
-2025-06-12 23:25:17 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
-2025-06-12 23:25:17 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
-2025-06-12 23:25:17 0 [Note] InnoDB: 10.5.29 started; log sequence number 45079; transaction id 20
-2025-06-12 23:25:17 0 [Note] Plugin 'FEEDBACK' is disabled.
-2025-06-12 23:25:17 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
-2025-06-12 23:25:17 0 [Note] InnoDB: Buffer pool(s) load completed at 250612 23:25:17
-2025-06-12 23:25:17 0 [Note] Server socket created on IP: '172.18.0.2'.
-2025-06-12 23:25:17 0 [Note] Reading of all Master_info entries succeeded
-2025-06-12 23:25:17 0 [Note] Added new Master_info '' to hash table
-2025-06-12 23:25:17 0 [Note] mysqld: ready for connections.
+⚙️ Inicializando base de datos...
+2025-06-12 23:36:39 0 [Warning] Ignoring user change to 'mysql' because the user was set to 'root' earlier on the command line
+
+2025-06-12 23:36:39 0 [Note] Starting MariaDB 10.5.29-MariaDB-0+deb11u1 source revision c461188ca6ad6ec3a54201eb87ebd75797d296df server_uid 1LbhFGVDw0Xko0zDB40yHk+hHJA= as process 12
+2025-06-12 23:36:39 0 [Note] InnoDB: Uses event mutexes
+2025-06-12 23:36:39 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2025-06-12 23:36:39 0 [Note] InnoDB: Number of pools: 1
+2025-06-12 23:36:39 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
+2025-06-12 23:36:39 0 [Note] mysqld: O_TMPFILE is not supported on /tmp (disabling future attempts)
+2025-06-12 23:36:39 0 [Note] InnoDB: Using Linux native AIO
+2025-06-12 23:36:39 0 [Note] InnoDB: Initializing buffer pool, total size = 134217728, chunk size = 134217728
+2025-06-12 23:36:39 0 [Note] InnoDB: Completed initialization of buffer pool
+2025-06-12 23:36:39 0 [Note] InnoDB: 128 rollback segments are active.
+2025-06-12 23:36:39 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2025-06-12 23:36:39 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2025-06-12 23:36:39 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2025-06-12 23:36:39 0 [Note] InnoDB: 10.5.29 started; log sequence number 45079; transaction id 20
+2025-06-12 23:36:39 0 [Note] Plugin 'FEEDBACK' is disabled.
+2025-06-12 23:36:39 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+ERROR: 1290  The MariaDB server is running with the --skip-grant-tables option so it cannot execute this statement
+2025-06-12 23:36:39 0 [ERROR] Aborting
+2025-06-12 23:36:40 0 [Note] Starting MariaDB 10.5.29-MariaDB-0+deb11u1 source revision c461188ca6ad6ec3a54201eb87ebd75797d296df server_uid 1LbhFGVDw0Xko0zDB40yHk+hHJA= as process 1
+2025-06-12 23:36:40 0 [Note] InnoDB: Uses event mutexes
+2025-06-12 23:36:40 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2025-06-12 23:36:40 0 [Note] InnoDB: Number of pools: 1
+2025-06-12 23:36:40 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
+2025-06-12 23:36:40 0 [Note] mysqld: O_TMPFILE is not supported on /tmp (disabling future attempts)
+2025-06-12 23:36:40 0 [Note] InnoDB: Using Linux native AIO
+2025-06-12 23:36:40 0 [Note] InnoDB: Initializing buffer pool, total size = 134217728, chunk size = 134217728
+2025-06-12 23:36:40 0 [Note] InnoDB: Completed initialization of buffer pool
+2025-06-12 23:36:40 0 [Note] InnoDB: 128 rollback segments are active.
+2025-06-12 23:36:40 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2025-06-12 23:36:40 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2025-06-12 23:36:40 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2025-06-12 23:36:40 0 [Note] InnoDB: 10.5.29 started; log sequence number 45091; transaction id 20
+2025-06-12 23:36:40 0 [Note] Plugin 'FEEDBACK' is disabled.
+2025-06-12 23:36:40 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2025-06-12 23:36:40 0 [Note] InnoDB: Buffer pool(s) load completed at 250612 23:36:40
+2025-06-12 23:36:40 0 [Note] Server socket created on IP: '172.18.0.2'.
+2025-06-12 23:36:40 0 [Note] Reading of all Master_info entries succeeded
+2025-06-12 23:36:40 0 [Note] Added new Master_info '' to hash table
+2025-06-12 23:36:40 0 [Note] mysqld: ready for connections.
 Version: '10.5.29-MariaDB-0+deb11u1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Debian 11
-2025-06-12 23:25:20 3 [Warning] Aborted connection 3 to db: 'unconnected' user: 'unauthenticated' host: 'wordpress.srcs_inception' (This connection closed normally without authentication)
+2025-06-12 23:36:42 3 [Warning] Aborted connection 3 to db: 'unconnected' user: 'unauthenticated' host: 'wordpress.srcs_inception' (This connection closed normally without authentication)
 danjimen@Inception:~/repo/inception$ docker logs wordpress
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100 6975k  100 6975k    0     0  2733k      0  0:00:02  0:00:02 --:--:-- 2733k
+100 6975k  100 6975k    0     0  2890k      0  0:00:02  0:00:02 --:--:-- 2889k
 Error: WordPress files seem to already be present here.
 Error: Database connection error (1130) Host 'wordpress.srcs_inception' is not allowed to connect to this MariaDB server
 Error: 'wp-config.php' not found.
 Either create one manually or use `wp config create`.
-danjimen@Inception:~/repo/inception$ docker logs nginx
 danjimen@Inception:~/repo/inception$ docker exec -it mariadb mysql -u root -p
 Enter password: 
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
@@ -53,6 +74,17 @@ Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| wordpress          |
++--------------------+
+4 rows in set (0.000 sec)
+
 MariaDB [(none)]> SELECT User, Host FROM mysql.user;
 +-------------+-----------+
 | User        | Host      |
@@ -61,17 +93,7 @@ MariaDB [(none)]> SELECT User, Host FROM mysql.user;
 | mysql       | localhost |
 | root        | localhost |
 +-------------+-----------+
-3 rows in set (0.014 sec)
-
-MariaDB [(none)]> SHOW DATABASES;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-+--------------------+
-3 rows in set (0.000 sec)
+3 rows in set (0.013 sec)
 
 MariaDB [(none)]> exit
 Bye
@@ -80,5 +102,5 @@ docker compose -f srcs/docker-compose.yml down --remove-orphans
 [+] Running 4/4
  ✔ Container nginx         Removed                                                                                                                     0.2s 
  ✔ Container wordpress     Removed                                                                                                                    10.2s 
- ✔ Container mariadb       Removed                                                                                                                     0.5s 
- ✔ Network srcs_inception  Removed    
+ ✔ Container mariadb       Removed                                                                                                                     0.4s 
+ ✔ Network srcs_inception  Removed                                                                                                                     0.2s
