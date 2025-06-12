@@ -29,4 +29,4 @@ wp core install \
   --allow-root
 
 # Lanzar php-fpm en primer plano
-php-fpm7.3 -F
+php-fpm7.4 -F
