@@ -1,0 +1,45 @@
+make
+docker compose -f srcs/docker-compose.yml up -d --build
+WARN[0000] /home/danjimen/repo/inception/srcs/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+Compose can now delegate builds to bake for better performance.
+ To do so, set COMPOSE_BAKE=true.
+[+] Building 2.3s (24/29)                                        docker:default
+ => [mariadb internal] load build definition from Dockerfile               0.1s
+ => => transferring dockerfile: 821B                                       0.0s
+ => [nginx internal] load build definition from Dockerfile                 0.0s
+ => => transferring dockerfile: 793B                                       0.0s
+ => [nginx internal] load metadata for docker.io/library/debian:bullseye   1.0s
+ => [mariadb internal] load .dockerignore                                  0.0s
+ => => transferring context: 2B                                            0.0s
+ => [nginx internal] load .dockerignore                                    0.1s
+ => => transferring context: 2B                                            0.0s
+ => [mariadb  1/13] FROM docker.io/library/debian:bullseye@sha256:0d3279f  0.0s
+ => [nginx internal] load build context                                    0.1s
+ => => transferring context: 190B                                          0.0s
+ => [mariadb internal] load build context                                  0.1s
+ => => transferring context: 236B                                          0.0s
+ => CACHED [mariadb  2/13] RUN apt-get update -y &&  apt-get upgrade -y &  0.0s
+ => CACHED [mariadb  3/13] COPY ./conf/50-server.cnf /etc/mysql/mariadb.c  0.0s
+ => CACHED [mariadb  4/13] COPY .env /etc/mysql/.env                       0.0s
+ => CACHED [mariadb  5/13] COPY ./tools/init.sql /etc/mysql/init.temp.sql  0.0s
+ => CACHED [mariadb  6/13] COPY ./tools/substitute_env_vars.sh /usr/local  0.0s
+ => CACHED [mariadb  7/13] RUN chmod +x /usr/local/bin/substitute_env_var  0.0s
+ => ERROR [mariadb  8/13] RUN /usr/local/bin/substitute_env_vars.sh        0.9s
+ => CACHED [nginx 2/8] RUN APT-GET update -y &&  apt-get upgrade -y &&  a  0.0s
+ => CACHED [nginx 3/8] COPY tools/generate_certs.sh /tmp/generate_certs.s  0.0s
+ => CACHED [nginx 4/8] COPY html/index.html /var/www/html/index.html       0.0s
+ => CACHED [nginx 5/8] COPY conf/default.conf /etc/nginx/sites-available/  0.0s
+ => CACHED [nginx 6/8] RUN chmod +x /tmp/generate_certs.sh &&  /tmp/gener  0.0s
+ => CACHED [nginx 7/8] RUN chmod -R 755 /var/www/html                      0.0s
+ => CACHED [nginx 8/8] RUN chown -R www-data:www-data /var/www/html        0.0s
+ => [nginx] exporting to image                                             0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:0bd293c92458ac7184560e1c9774a500058ce3d46f839  0.0s
+ => => naming to docker.io/library/srcs-nginx                              0.0s
+ => [nginx] resolving provenance for metadata file                         0.0s
+------
+ > [mariadb  8/13] RUN /usr/local/bin/substitute_env_vars.sh:
+0.752 /usr/local/bin/substitute_env_vars.sh: line 7: envsubst: command not found
+------
+failed to solve: process "/bin/sh -c /usr/local/bin/substitute_env_vars.sh" did not complete successfully: exit code: 127
+make: *** [Makefile:6: up] Error 1
