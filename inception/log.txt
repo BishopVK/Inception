@@ -1,46 +1,50 @@
-docker ps
-CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS                  PORTS                                     NAMES
-3173f7b25047   srcs-nginx       "nginx -g 'daemon of…"   3 seconds ago   Up Less than a second   0.0.0.0:443->443/tcp, [::]:443->443/tcp   nginx
-96408379e720   srcs-wordpress   "bash /usr/local/bin…"   3 seconds ago   Up 3 seconds            9000/tcp                                  wordpress
-622cd4c39cd4   srcs-mariadb     "/usr/local/bin/mari…"   3 seconds ago   Up 3 seconds            3306/tcp                                  mariadb
+✔ mariadb                 Built                                                                                                                       0.0s 
+ ✔ nginx                   Built                                                                                                                       0.0s 
+ ✔ wordpress               Built                                                                                                                       0.0s 
+ ✔ Network srcs_inception  Created                                                                                                                     0.2s 
+ ✔ Container mariadb       Started                                                                                                                     0.4s 
+ ✔ Container wordpress     Started                                                                                                                     0.6s 
+ ✔ Container nginx         Started                                                                                                                     0.9s 
+danjimen@Inception:~/repo/inception$ docker ps
+CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                     NAMES
+9dc76802dc05   srcs-nginx       "nginx -g 'daemon of…"   5 seconds ago   Up 4 seconds   0.0.0.0:443->443/tcp, [::]:443->443/tcp   nginx
+f701305a9231   srcs-wordpress   "bash /usr/local/bin…"   5 seconds ago   Up 5 seconds   9000/tcp                                  wordpress
+c07d8e40b636   srcs-mariadb     "/usr/local/bin/mari…"   5 seconds ago   Up 5 seconds   3306/tcp                                  mariadb
+danjimen@Inception:~/repo/inception$ docker logs ngxinx
+Error response from daemon: No such container: ngxinx
+danjimen@Inception:~/repo/inception$ docker logs nginx
+danjimen@Inception:~/repo/inception$ docker logs nginx
 danjimen@Inception:~/repo/inception$ docker logs mariadb
-2025-06-12 22:53:25 0 [Note] Starting MariaDB 10.5.29-MariaDB-0+deb11u1 source revision c461188ca6ad6ec3a54201eb87ebd75797d296df server_uid TFuK/FuhqyuwZjKs+whMnw18jHA= as process 1
-2025-06-12 22:53:25 0 [Note] InnoDB: Uses event mutexes
-2025-06-12 22:53:25 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
-2025-06-12 22:53:25 0 [Note] InnoDB: Number of pools: 1
-2025-06-12 22:53:25 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
-2025-06-12 22:53:25 0 [Note] mysqld: O_TMPFILE is not supported on /tmp (disabling future attempts)
-2025-06-12 22:53:25 0 [Note] InnoDB: Using Linux native AIO
-2025-06-12 22:53:25 0 [Note] InnoDB: Initializing buffer pool, total size = 134217728, chunk size = 134217728
-2025-06-12 22:53:25 0 [Note] InnoDB: Completed initialization of buffer pool
-2025-06-12 22:53:25 0 [Note] InnoDB: 128 rollback segments are active.
-2025-06-12 22:53:25 0 [Note] InnoDB: Creating shared tablespace for temporary tables
-2025-06-12 22:53:25 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
-2025-06-12 22:53:25 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
-2025-06-12 22:53:25 0 [Note] InnoDB: 10.5.29 started; log sequence number 45079; transaction id 20
-2025-06-12 22:53:25 0 [Note] Plugin 'FEEDBACK' is disabled.
-2025-06-12 22:53:25 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
-2025-06-12 22:53:25 0 [Note] InnoDB: Buffer pool(s) load completed at 250612 22:53:25
-2025-06-12 22:53:25 0 [Note] Server socket created on IP: '172.18.0.2'.
-2025-06-12 22:53:25 0 [Note] Reading of all Master_info entries succeeded
-2025-06-12 22:53:25 0 [Note] Added new Master_info '' to hash table
-2025-06-12 22:53:25 0 [Note] mysqld: ready for connections.
+2025-06-12 23:10:01 0 [Note] Starting MariaDB 10.5.29-MariaDB-0+deb11u1 source revision c461188ca6ad6ec3a54201eb87ebd75797d296df server_uid s30LMsb9Lbot5UbdZuhMu0N2b9U= as process 1
+2025-06-12 23:10:01 0 [Note] InnoDB: Uses event mutexes
+2025-06-12 23:10:01 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2025-06-12 23:10:01 0 [Note] InnoDB: Number of pools: 1
+2025-06-12 23:10:01 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
+2025-06-12 23:10:01 0 [Note] mysqld: O_TMPFILE is not supported on /tmp (disabling future attempts)
+2025-06-12 23:10:01 0 [Note] InnoDB: Using Linux native AIO
+2025-06-12 23:10:01 0 [Note] InnoDB: Initializing buffer pool, total size = 134217728, chunk size = 134217728
+2025-06-12 23:10:01 0 [Note] InnoDB: Completed initialization of buffer pool
+2025-06-12 23:10:01 0 [Note] InnoDB: 128 rollback segments are active.
+2025-06-12 23:10:01 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2025-06-12 23:10:01 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2025-06-12 23:10:01 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2025-06-12 23:10:01 0 [Note] InnoDB: 10.5.29 started; log sequence number 45079; transaction id 20
+2025-06-12 23:10:01 0 [Note] Plugin 'FEEDBACK' is disabled.
+2025-06-12 23:10:01 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2025-06-12 23:10:01 0 [Note] InnoDB: Buffer pool(s) load completed at 250612 23:10:01
+2025-06-12 23:10:01 0 [Note] Server socket created on IP: '172.18.0.2'.
+2025-06-12 23:10:02 0 [Note] Reading of all Master_info entries succeeded
+2025-06-12 23:10:02 0 [Note] Added new Master_info '' to hash table
+2025-06-12 23:10:02 0 [Note] mysqld: ready for connections.
 Version: '10.5.29-MariaDB-0+deb11u1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Debian 11
-2025-06-12 22:53:28 3 [Warning] Aborted connection 3 to db: 'unconnected' user: 'unauthenticated' host: 'wordpress.srcs_inception' (This connection closed normally without authentication)
+2025-06-12 23:10:16 3 [Warning] Aborted connection 3 to db: 'unconnected' user: 'unauthenticated' host: 'wordpress.srcs_inception' (This connection closed normally without authentication)
 danjimen@Inception:~/repo/inception$ docker logs wordpress
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100 6975k  100 6975k    0     0  2678k      0  0:00:02  0:00:02 --:--:-- 2678k
-Error: WordPress files seem to already be present here.
+100 6975k  100 6975k    0     0  2791k      0  0:00:02  0:00:02 --:--:-- 2790k
+Downloading WordPress 6.8.1 (en_US)...
+md5 hash verified: 1bfd868dd21ff736e94307f2c9828c7a
+Success: WordPress downloaded.
 Error: Database connection error (1130) Host 'wordpress.srcs_inception' is not allowed to connect to this MariaDB server
 Error: 'wp-config.php' not found.
 Either create one manually or use `wp config create`.
-danjimen@Inception:~/repo/inception$ docker logs nginx
-nginx: [emerg] "fastcgi_index" directive is duplicate in /etc/nginx/sites-enabled/default:22
-nginx: [emerg] "fastcgi_index" directive is duplicate in /etc/nginx/sites-enabled/default:22
-nginx: [emerg] "fastcgi_index" directive is duplicate in /etc/nginx/sites-enabled/default:22
-nginx: [emerg] "fastcgi_index" directive is duplicate in /etc/nginx/sites-enabled/default:22
-nginx: [emerg] "fastcgi_index" directive is duplicate in /etc/nginx/sites-enabled/default:22
-nginx: [emerg] "fastcgi_index" directive is duplicate in /etc/nginx/sites-enabled/default:22
-nginx: [emerg] "fastcgi_index" directive is duplicate in /etc/nginx/sites-enabled/default:22
-nginx: [emerg] "fastcgi_index" directive is duplicate in /etc/nginx/sites-enabled/default:22
