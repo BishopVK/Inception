@@ -1,4 +1,9 @@
-CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS                           PORTS      NAMES
-235f44435545   srcs-nginx       "nginx -g 'daemon of…"   54 seconds ago   Restarting (1) 23 seconds ago               nginx
-51e06f724cec   srcs-wordpress   "bash /usr/local/bin…"   54 seconds ago   Restarting (127) 3 seconds ago              wordpress
-ccf542c7d104   srcs-mariadb     "/usr/local/bin/mari…"   54 seconds ago   Up 54 seconds                    3306/tcp   mariadb
+danjimen@Inception:~/repo/inception$ docker ps
+CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS                                  PORTS      NAMES
+d24a2d8b541a   srcs-nginx       "nginx -g 'daemon of…"   3 seconds ago   Restarting (1) Less than a second ago              nginx
+9688efa33304   srcs-wordpress   "bash /usr/local/bin…"   3 seconds ago   Up 3 seconds                            9000/tcp   wordpress
+e0e028fb6ab1   srcs-mariadb     "/usr/local/bin/mari…"   4 seconds ago   Up 3 seconds                            3306/tcp   mariadb
+danjimen@Inception:~/repo/inception$ docker logs wordpress
+/usr/local/bin/wp_setup.sh: line 4: cd: /ust/local/bin: No such file or directory
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
