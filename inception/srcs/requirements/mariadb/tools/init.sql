@@ -1,12 +1,9 @@
-CREATE DATABASE IF NOT EXISTS ${DB_DATABASE};
+CREATE DATABASE IF NOT EXISTS wordpress;
 
--- Opcional, si quieres asegurar que root tiene contraseña (no es imprescindible)
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD}';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';
 
--- Crear el usuario solo si no existe
-CREATE USER IF NOT EXISTS '${DB_USER_NAME}'@'%' IDENTIFIED BY '${DB_USER_PASSWORD}';
+CREATE USER IF NOT EXISTS 'danjimen'@'%' IDENTIFIED BY '1234';
 
--- Dar acceso solo a la base de datos de WordPress
-GRANT ALL PRIVILEGES ON ${DB_DATABASE}.* TO '${DB_USER_NAME}'@'%';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'danjimen'@'%';
 
 FLUSH PRIVILEGES;
