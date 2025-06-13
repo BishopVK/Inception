@@ -19,5 +19,6 @@ clean:
 
 fclean:
 	docker compose -f srcs/docker-compose.yml down --volumes --remove-orphans
+	docker container prune -f
 	docker image prune -af
 	docker volume prune -f
