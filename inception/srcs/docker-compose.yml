@@ -23,7 +23,7 @@ services:
       dockerfile: requirements/mariadb/Dockerfile
     volumes:
     #  - mariadb_data:/var/lib/mysql
-      - /home/danjimen/data/mariadb:/var/www/html
+      - /home/danjimen/data/mariadb:/var/lib/mysql
     networks:
       - inception
     env_file:
