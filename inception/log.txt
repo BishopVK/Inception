@@ -1,62 +1,6 @@
- ✔ mariadb                 Built                                                                                                                                           0.0s 
- ✔ nginx                   Built                                                                                                                                           0.0s 
- ✔ wordpress               Built                                                                                                                                           0.0s 
- ✔ Network srcs_inception  Created                                                                                                                                         0.2s 
- ✔ Container mariadb       Started                                                                                                                                         0.5s 
- ✔ Container wordpress     Started                                                                                                                                         0.7s 
- ✔ Container nginx         Started                                                                                                                                         1.4s 
-danjimen@Inception:~/repo/inception$ docker logs nginx
-danjimen@Inception:~/repo/inception$ docker logs mariadb
-[+] Sustituyendo variables en init.temp.sql...
-[+] Archivo /etc/mysql/init.sql generado:
-CREATE DATABASE IF NOT EXISTS wordpress;
-
--- Opcional, si quieres asegurar que root tiene contraseña (no es imprescindible)
-ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';
-
--- Crear el usuario solo si no existe
-CREATE USER IF NOT EXISTS 'danjimen'@'%' IDENTIFIED BY '1234';
-
--- Dar acceso solo a la base de datos de WordPress
-GRANT ALL PRIVILEGES ON wordpress.* TO 'danjimen'@'%';
-
-FLUSH PRIVILEGES;[+] Lanzando mysqld...
-[+] Esperando conexión a MariaDB...
-[+] Esperando a que MariaDB arranque...
-2025-06-13  0:57:00 0 [Note] Starting MariaDB 10.5.29-MariaDB-0+deb11u1 source revision c461188ca6ad6ec3a54201eb87ebd75797d296df server_uid raQdqQeGuz8c+Jx46608UC9fjgk= as process 13
-2025-06-13  0:57:00 0 [Note] InnoDB: Uses event mutexes
-2025-06-13  0:57:00 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
-2025-06-13  0:57:00 0 [Note] InnoDB: Number of pools: 1
-2025-06-13  0:57:00 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
-2025-06-13  0:57:00 0 [Note] mysqld: O_TMPFILE is not supported on /tmp (disabling future attempts)
-2025-06-13  0:57:00 0 [Note] InnoDB: Using Linux native AIO
-2025-06-13  0:57:00 0 [Note] InnoDB: Initializing buffer pool, total size = 134217728, chunk size = 134217728
-2025-06-13  0:57:00 0 [Note] InnoDB: Completed initialization of buffer pool
-2025-06-13  0:57:01 0 [Note] InnoDB: 128 rollback segments are active.
-2025-06-13  0:57:01 0 [Note] InnoDB: Creating shared tablespace for temporary tables
-2025-06-13  0:57:01 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
-2025-06-13  0:57:01 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
-2025-06-13  0:57:01 0 [Note] InnoDB: 10.5.29 started; log sequence number 45079; transaction id 20
-2025-06-13  0:57:01 0 [Note] Plugin 'FEEDBACK' is disabled.
-2025-06-13  0:57:01 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
-2025-06-13  0:57:01 0 [Note] Server socket created on IP: '172.18.0.2'.
-2025-06-13  0:57:01 0 [Note] InnoDB: Buffer pool(s) load completed at 250613  0:57:01
-2025-06-13  0:57:01 0 [Note] Reading of all Master_info entries succeeded
-2025-06-13  0:57:01 0 [Note] Added new Master_info '' to hash table
-2025-06-13  0:57:01 0 [Note] mysqld: ready for connections.
-Version: '10.5.29-MariaDB-0+deb11u1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Debian 11
-mysqld is alive
-danjimen@Inception:~/repo/inception$ docker logs wordpress
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100 6975k  100 6975k    0     0  3024k      0  0:00:02  0:00:02 --:--:-- 3023k
-Error: WordPress files seem to already be present here.
-Error: The 'wp-config.php' file already exists.
-Success: WordPress installed successfully.
-danjimen@Inception:~/repo/inception$ make down
-docker compose -f srcs/docker-compose.yml down --remove-orphans
-[+] Running 4/4
- ✔ Container nginx         Removed                                                                                                                                         0.2s 
- ✔ Container wordpress     Removed                                                                                                                                        10.2s 
- ✔ Container mariadb       Removed                                                                                                                                        10.2s 
- ✔ Network srcs_inception  Removed     
+docker exec -it wordpress sh
+# ps aux | grep php-fpm
+root          15  0.0  1.0 194088 20872 ?        Ss   01:29   0:00 php-fpm: master process (/etc/php/7.4/fpm/php-fpm.conf)
+www-data      16  0.0  0.3 194088  7440 ?        S    01:29   0:00 php-fpm: pool www
+www-data      17  0.0  0.3 194088  7440 ?        S    01:29   0:00 php-fpm: pool www
+root          24  0.0  0.0   3240   644 pts/0    S+   01:36   0:00 grep php-fpm
