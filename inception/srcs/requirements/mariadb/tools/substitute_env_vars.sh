@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Load environment variables from .env file
+echo "[+] Sustituyendo variables en init.temp.sql..."
+
+# Cargar variables de entorno
 export $(grep -v '^#' /etc/mysql/.env | xargs)
 
-# # Substitute environment variables in init.sql and output to init.sql
+# Sustituir variables en init.temp.sql
 envsubst < /etc/mysql/init.temp.sql > /etc/mysql/init.sql
+
+echo "[+] Archivo /etc/mysql/init.sql generado:"
+cat /etc/mysql/init.sql

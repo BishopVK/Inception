@@ -1,17 +1,13 @@
 #!/bin/bash
 
 # Sustituye variables antes de lanzar MariaDB
-#/usr/local/bin/substitute_env_vars.sh
+bash /usr/local/bin/substitute_env_vars.sh
 
-# Solo inicializa si no existe ya la base de datos
-if [ ! -d "/var/lib/mysql/mysql" ]; then
-    echo "⚙️ Inicializando base de datos..."
-    mysql_install_db --user=mysql > /dev/null
-    mysqld --user=mysql --bootstrap < /etc/mysql/init.sql
-fi
+# Inicia el servicio MariaDB
+service mysql start
 
-# Inicia MariaDB en primer plano
-exec mysqld --user=mysql
+# Ejecuta el SQL inicial
+mysql < /etc/mysql/init.sql
 
-#mysql_install_db
-#mysqld
+# Espera indefinidamente (mantiene el contenedor vivo)
+tail -f /dev/null
