@@ -9,7 +9,7 @@ RUN	apt-get update -y && \
 
 # Copiar el script y el archivo de configuración
 COPY tools/generate_certs.sh /tmp/generate_certs.sh
-COPY html/index.html /var/www/html/index.html
+#COPY html/index.html /var/www/html/index.html
 COPY conf/default.conf /etc/nginx/sites-available/default
 
 # Dar permisos de ejecución al script y ejecutarlo
