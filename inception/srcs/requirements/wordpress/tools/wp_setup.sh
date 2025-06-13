@@ -11,11 +11,13 @@ fi
 # Copiar www.conf
 cp /usr/local/etc/php-fpm-www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-# Descargar WP-CLI
-cd /usr/local/bin
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-chmod +x wp-cli.phar
-mv wp-cli.phar wp
+# Descargar WP-CLI si no existe
+if [ ! -f /usr/local/bin/wp ]; then
+  cd /usr/local/bin
+  curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+  chmod +x wp-cli.phar
+  mv wp-cli.phar wp
+fi
 
 # Preparar el directorio web
 mkdir -p /var/www/html
