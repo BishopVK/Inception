@@ -7,11 +7,11 @@ RUN apt-get update -y && \
 	apt install mariadb-server gettext -y && \
 	apt-get clean
 
-COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY mariadb/conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY .env /etc/mysql/.env
-COPY ./tools/init.sql /etc/mysql/init.temp.sql
-COPY ./tools/substitute_env_vars.sh /usr/local/bin/substitute_env_vars.sh
-COPY ./tools/mariadb_setup.sh /usr/local/bin/mariadb_setup.sh
+COPY mariadb/tools/init.sql /etc/mysql/init.temp.sql
+COPY mariadb/tools/substitute_env_vars.sh /usr/local/bin/substitute_env_vars.sh
+COPY mariadb/tools/mariadb_setup.sh /usr/local/bin/mariadb_setup.sh
 
 RUN chmod +x /usr/local/bin/*.sh
 RUN mkdir /run/mysqld

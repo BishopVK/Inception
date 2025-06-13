@@ -19,7 +19,8 @@ services:
     container_name:
       mariadb
     build:
-      context: ./requirements/mariadb
+      context: ./requirements
+      dockerfile: mariadb/Dockerfile
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
