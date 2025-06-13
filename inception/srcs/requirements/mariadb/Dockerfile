@@ -27,5 +27,5 @@ RUN mkdir /run/mysqld
 EXPOSE 3306
 
 # Comando que se ejecutará cuando el contenedor arranca
-#CMD ["mysqld"]
-CMD ["/usr/local/bin/mariadb_setup.sh"]
+CMD ["mysqld"]
+#CMD ["/usr/local/bin/mariadb_setup.sh"]
