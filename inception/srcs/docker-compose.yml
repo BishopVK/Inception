@@ -20,6 +20,8 @@ services:
       mariadb
     build:
       context: ./requirements/mariadb
+    volumes:
+      - mariadb_data:/var/lib/mysql
     networks:
       - inception
     env_file:
@@ -47,3 +49,4 @@ networks:
 
 volumes:
   wordpress_data:
+  mariadb_data:
