@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Instalar wordpress sino no existe ya. Aseguramos la persistencia al bajar y levantar contenedores.
+# Siempre que no eliminemos los volumenes.
+if [ -f /var/www/html/wp-config.php ]; then
+    echo "[+] WordPress ya está instalado. Saltando configuración inicial."
+    php-fpm7.4 -F
+    exit 0
+fi
+
 # Copiar www.conf
 cp /usr/local/etc/php-fpm-www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
