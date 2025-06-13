@@ -1,0 +1,28 @@
+├── Makefile
+└── srcs/
+	├── docker-compose.yml
+	├── .env
+	└── requirements/
+		├── mariadb/
+		│	├── Dockerfile
+		│	├── conf/
+		│	│	└── 50-server.cnf
+		│	└── tools/
+		│		├── init.sql
+		│		├── mariadb_setup.sh
+		│		└── substitute_env_vars.sh
+		├── nginx/
+		│	├── Dockerfile
+		│	├── conf/
+		│	│	└── default.conf
+		│	├── html/
+		│	│	└── index.html
+		│	└── tools/
+		│		└── generate_certs.sh
+		└── wordpress/
+			├── Dockerfile
+			├── conf/
+			│	├── php.ini
+			│	└── www.conf
+			└── tools/
+				└── wp_setup.sh
