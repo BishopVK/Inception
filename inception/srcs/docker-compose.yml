@@ -6,7 +6,7 @@ services:
       context: ./requirements/nginx
     #volumes:
       # - nginx_data:/var/www/html  # Comentado, puedes activar si usas volumen nombrado
-      #- ./requirements/nginx/html:/var/www/html
+    #  - ./requirements/nginx/html:/var/www/html
     ports:
       - "${NGINX_PORT}:443"
     networks:
