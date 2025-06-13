@@ -1,31 +1,21 @@
- ✔ mariadb              Built                                                                                                                                              0.0s 
- ✔ nginx                Built                                                                                                                                              0.0s 
- ✔ wordpress            Built                                                                                                                                              0.0s 
- ✔ Container mariadb    Started                                                                                                                                            0.2s 
- ✔ Container wordpress  Started                                                                                                                                            0.5s 
- ✔ Container nginx      Started                                                                                                                                            0.7s 
-danjimen@Inception:~/repo/inception$ docker exec -it wordpress ps aux | grep php-fpm
-root          15  0.0  1.0 194088 21428 ?        Ss   00:45   0:00 php-fpm: mast
-www-data      16  0.0  0.3 194088  7552 ?        S    00:45   0:00 php-fpm: pool
-www-data      17  0.0  0.3 194088  7552 ?        S    00:45   0:00 php-fpm: pool
-danjimen@Inception:~/repo/inception$ docker logs nginx
+ ✔ mariadb                 Built                                                                                                                                           0.0s 
+ ✔ nginx                   Built                                                                                                                                           0.0s 
+ ✔ wordpress               Built                                                                                                                                           0.0s 
+ ✔ Network srcs_inception  Created                                                                                                                                         0.2s 
+ ✔ Container mariadb       Started                                                                                                                                         0.4s 
+ ✔ Container wordpress     Started                                                                                                                                         0.9s 
+ ✔ Container nginx         Started                                                                                                                                         1.2s 
 danjimen@Inception:~/repo/inception$ docker logs wordpress
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100 6975k  100 6975k    0     0  3132k      0  0:00:02  0:00:02 --:--:-- 3132k
+100 6975k  100 6975k    0     0  2709k      0  0:00:02  0:00:02 --:--:-- 2708k
 Error: WordPress files seem to already be present here.
 Error: The 'wp-config.php' file already exists.
 Success: WordPress installed successfully.
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100 6975k  100 6975k    0     0  2514k      0  0:00:02  0:00:02 --:--:-- 2513k
-Error: WordPress files seem to already be present here.
-Error: The 'wp-config.php' file already exists.
-WordPress is already installed.
 danjimen@Inception:~/repo/inception$ make down
 docker compose -f srcs/docker-compose.yml down --remove-orphans
 [+] Running 4/4
  ✔ Container nginx         Removed                                                                                                                                         0.3s 
- ✔ Container wordpress     Removed                                                                                                                                        10.2s 
- ✔ Container mariadb       Removed                                                                                                                                        10.2s 
- ✔ Network srcs_inception  Removed   
+ ✔ Container wordpress     Removed                                                                                                                                        10.3s 
+ ✔ Container mariadb       Removed                                                                                                                                        10.4s 
+ ✔ Network srcs_inception  Removed    
