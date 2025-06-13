@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copiar www.conf
+cp /usr/local/etc/php-fpm-www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
 # Descargar WP-CLI
 cd /usr/local/bin
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
