@@ -1,15 +1,15 @@
  ✔ mariadb                 Built                                                                                                                                           0.0s 
  ✔ nginx                   Built                                                                                                                                           0.0s 
  ✔ wordpress               Built                                                                                                                                           0.0s 
- ✔ Network srcs_inception  Created                                                                                                                                         0.2s 
+ ✔ Network srcs_inception  Created                                                                                                                                         0.1s 
  ✔ Container mariadb       Started                                                                                                                                         0.3s 
- ✔ Container wordpress     Started                                                                                                                                         0.4s 
- ✔ Container nginx         Started                                                                                                                                         0.7s 
+ ✔ Container wordpress     Started                                                                                                                                         0.5s 
+ ✔ Container nginx         Started                                                                                                                                         1.3s 
 danjimen@Inception:~/repo/inception$ docker ps
 CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                     NAMES
-45f9a2eadb6e   srcs-nginx       "nginx -g 'daemon of…"   4 seconds ago   Up 3 seconds   0.0.0.0:443->443/tcp, [::]:443->443/tcp   nginx
-48b09b707f47   srcs-wordpress   "bash /usr/local/bin…"   4 seconds ago   Up 3 seconds   9000/tcp                                  wordpress
-c510b007b3e6   srcs-mariadb     "/usr/local/bin/mari…"   4 seconds ago   Up 3 seconds   3306/tcp                                  mariadb
+5b2217e21e45   srcs-nginx       "nginx -g 'daemon of…"   4 seconds ago   Up 3 seconds   0.0.0.0:443->443/tcp, [::]:443->443/tcp   nginx
+1c0a6a8ebdab   srcs-wordpress   "bash /usr/local/bin…"   4 seconds ago   Up 3 seconds   9000/tcp                                  wordpress
+149efa01d379   srcs-mariadb     "/usr/local/bin/mari…"   4 seconds ago   Up 3 seconds   3306/tcp                                  mariadb
 danjimen@Inception:~/repo/inception$ docker logs nginx
 danjimen@Inception:~/repo/inception$ docker logs mariadb
 [+] Sustituyendo variables en init.temp.sql...
@@ -25,19 +25,73 @@ CREATE USER IF NOT EXISTS 'danjimen'@'%' IDENTIFIED BY '1234';
 -- Dar acceso solo a la base de datos de WordPress
 GRANT ALL PRIVILEGES ON wordpress.* TO 'danjimen'@'%';
 
-mysql: unrecognized service
-ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/run/mysqld/mysqld.sock' (2)
+FLUSH PRIVILEGES;[+] Lanzando mysqld...
+[+] Esperando conexión a MariaDB...
+[+] Esperando a que MariaDB arranque...
+2025-06-13  0:10:57 0 [Note] Starting MariaDB 10.5.29-MariaDB-0+deb11u1 source revision c461188ca6ad6ec3a54201eb87ebd75797d296df server_uid 9UY7TaoGK4CYsRDJ4YIhM4KxVu4= as process 13
+2025-06-13  0:10:57 0 [Note] InnoDB: Uses event mutexes
+2025-06-13  0:10:57 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2025-06-13  0:10:57 0 [Note] InnoDB: Number of pools: 1
+2025-06-13  0:10:57 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
+2025-06-13  0:10:57 0 [Note] mysqld: O_TMPFILE is not supported on /tmp (disabling future attempts)
+2025-06-13  0:10:57 0 [Note] InnoDB: Using Linux native AIO
+2025-06-13  0:10:57 0 [Note] InnoDB: Initializing buffer pool, total size = 134217728, chunk size = 134217728
+2025-06-13  0:10:57 0 [Note] InnoDB: Completed initialization of buffer pool
+2025-06-13  0:10:57 0 [Note] InnoDB: 128 rollback segments are active.
+2025-06-13  0:10:57 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2025-06-13  0:10:57 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2025-06-13  0:10:57 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2025-06-13  0:10:57 0 [Note] InnoDB: 10.5.29 started; log sequence number 45079; transaction id 20
+2025-06-13  0:10:57 0 [Note] Plugin 'FEEDBACK' is disabled.
+2025-06-13  0:10:57 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2025-06-13  0:10:57 0 [Note] InnoDB: Buffer pool(s) load completed at 250613  0:10:57
+2025-06-13  0:10:57 0 [Note] Server socket created on IP: '172.18.0.2'.
+2025-06-13  0:10:58 0 [Note] Reading of all Master_info entries succeeded
+2025-06-13  0:10:58 0 [Note] Added new Master_info '' to hash table
+2025-06-13  0:10:58 0 [Note] mysqld: ready for connections.
+Version: '10.5.29-MariaDB-0+deb11u1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Debian 11
+mysqld is alive
 danjimen@Inception:~/repo/inception$ docker logs wordpress
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100 6975k  100 6975k    0     0  2163k      0  0:00:03  0:00:03 --:--:-- 2163k
+100 6975k  100 6975k    0     0  2948k      0  0:00:02  0:00:02 --:--:-- 2948k
 Error: WordPress files seem to already be present here.
-Error: Database connection error (2002) Connection refused
-Error: 'wp-config.php' not found.
-Either create one manually or use `wp config create`.
+Success: Generated 'wp-config.php' file.
+Success: WordPress installed successfully.
 danjimen@Inception:~/repo/inception$ docker exec -it mariadb mysql -u root -p
 Enter password: 
-ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/run/mysqld/mysqld.sock' (2)
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 7
+Server version: 10.5.29-MariaDB-0+deb11u1 Debian 11
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| wordpress          |
++--------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [(none)]> SELECT User, Host FROM mysql.user;
++-------------+-----------+
+| User        | Host      |
++-------------+-----------+
+| danjimen    | %         |
+| mariadb.sys | localhost |
+| mysql       | localhost |
+| root        | localhost |
++-------------+-----------+
+4 rows in set (0.001 sec)
+
+MariaDB [(none)]> exit
+Bye
 danjimen@Inception:~/repo/inception$ docker exec -it mariadb cat /etc/mysql/init.sql
 CREATE DATABASE IF NOT EXISTS wordpress;
 
@@ -57,3 +111,4 @@ docker compose -f srcs/docker-compose.yml down --remove-orphans
  ✔ Container wordpress     Removed                                                                                                                                        10.2s 
  ✔ Container mariadb       Removed                                                                                                                                        10.2s 
  ✔ Network srcs_inception  Removed                                                                                                                                         0.2s 
+
