@@ -2,7 +2,13 @@
 
 NAME	=	inception
 
-up:
+all: up
+
+setup_dirs:
+	mkdir -p /home/danjimen/data/wordpress
+	mkdir -p /home/danjimen/data/mariadb
+
+up:	setup_dirs
 	docker compose -f srcs/docker-compose.yml up -d --build
 
 down:

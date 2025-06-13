@@ -5,8 +5,8 @@ services:
     build:
       context: ./requirements/nginx
     volumes:
-      # - nginx_data:/var/www/html  # Comentado, puedes activar si usas volumen nombrado
-      - wordpress_data:/var/www/html
+    #  - wordpress_data:/var/www/html
+      - /home/danjimen/data/wordpress:/var/www/html
     ports:
       - "${NGINX_PORT}:443"
     networks:
@@ -22,7 +22,8 @@ services:
       context: .
       dockerfile: requirements/mariadb/Dockerfile
     volumes:
-      - mariadb_data:/var/lib/mysql
+    #  - mariadb_data:/var/lib/mysql
+      - /home/danjimen/data/mariadb:/var/www/html
     networks:
       - inception
     env_file:
@@ -35,7 +36,8 @@ services:
     build:
       context: ./requirements/wordpress
     volumes:
-      - wordpress_data:/var/www/html
+    #  - wordpress_data:/var/www/html
+      - /home/danjimen/data/wordpress:/var/www/html
     networks:
       - inception
     env_file:
@@ -48,6 +50,6 @@ networks:
   inception:
     driver: bridge
 
-volumes:
-  wordpress_data:
-  mariadb_data:
+#volumes:
+#  wordpress_data:
+#  mariadb_data:
