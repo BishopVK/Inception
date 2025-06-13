@@ -1,13 +1,21 @@
 #!/bin/bash
 
-# Sustituye variables antes de lanzar MariaDB
+# Sustituye variables en init.sql
 bash /usr/local/bin/substitute_env_vars.sh
 
-# Inicia el servicio MariaDB
-service mysql start
+# Inicia MariaDB en segundo plano
+echo "[+] Lanzando mysqld..."
+mysqld &
+
+# Espera a que el socket esté disponible antes de continuar
+echo "[+] Esperando conexión a MariaDB..."
+while ! mysqladmin ping --silent; do
+    echo "[+] Esperando a que MariaDB arranque..."
+    sleep 1
+done
 
 # Ejecuta el SQL inicial
-mysql < /etc/mysql/init.sql
+mysql -u root < /etc/mysql/init.sql
 
-# Espera indefinidamente (mantiene el contenedor vivo)
+# Mantiene el contenedor vivo
 tail -f /dev/null
