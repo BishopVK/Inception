@@ -36,6 +36,13 @@ else
     echo "[+] SQL inicial ya ejecutado previamente. Saltando."
 fi
 
+# Mata el mysqld temporal (para que luego arranque en primer plano como proceso principal)
+echo "[+] Deteniendo mysqld temporal..."
+mysqladmin shutdown
+
+# Ejecutamos mysqld como proceso principal del contenedor
+echo "[+] Lanzando mysqld en primer plano..."
+exec mysqld
 
 # Mantiene el contenedor vivo
-tail -f /dev/null
+#tail -f /dev/null
