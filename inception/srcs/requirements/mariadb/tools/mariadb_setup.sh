@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Hace que el script falle si algún comando falla
-set -e
-
 # Sustituye variables en init.sql
 bash /usr/local/bin/substitute_env_vars.sh
 
@@ -22,7 +19,7 @@ mysqld &
 
 # Espera a que el socket esté disponible antes de continuar
 echo "[+] Esperando conexión a MariaDB..."
-until mysqladmin ping --silent; do
+while ! mysqladmin ping --silent; do
     echo "[+] Esperando a que MariaDB arranque..."
     sleep 1
 done
