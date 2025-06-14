@@ -32,5 +32,4 @@ fclean:
 	docker container prune -f
 	docker image prune -af
 	docker volume prune -f
-	sudo rm -rf /home/danjimen/data/wordpress/*
-	sudo rm -rf /home/danjimen/data/mariadb/*
+	sudo rm -rf /home/danjimen/data/
