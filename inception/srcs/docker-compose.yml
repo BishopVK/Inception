@@ -5,7 +5,8 @@ services:
     build:
       context: ./requirements/nginx
     volumes:
-    #  - wordpress_data:/var/www/html
+      # - nginx_data:/var/www/html  # Comentado, puedes activar si usas volumen nombrado
+    #  - wordpress_data:/var/www/html # Comentado, puedes activar si usas volumen nombrado
       - /home/danjimen/data/wordpress:/var/www/html
     ports:
       - "${NGINX_PORT}:443"
@@ -50,6 +51,6 @@ networks:
   inception:
     driver: bridge
 
-#volumes:
-#  wordpress_data:
-#  mariadb_data:
+volumes:
+  wordpress_data:
+  mariadb_data:
