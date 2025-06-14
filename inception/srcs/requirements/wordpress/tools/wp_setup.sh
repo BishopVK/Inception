@@ -1,3 +1,5 @@
+Aquí tienes la versión modificada de tu script requirements/wordpress/tools/wp_setup.sh:
+
 #!/bin/bash
 
 # Aseguramos que el directorio principal de WordPress exista y navegamos a él
@@ -50,6 +52,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     echo "[+] Eliminando post y página por defecto de WordPress..."
     wp post delete $(wp post list --post_type=post --posts_per_page=1 --format=ids --allow-root) --force --allow-root
     wp post delete $(wp post list --post_type=page --posts_per_page=1 --format=ids --allow-root) --force --allow-root
+    echo "[+] Posts/páginas por defecto eliminados (si existían)."
 
 
     # 2. Crear una nueva página "Inicio" con contenido personalizado
@@ -66,17 +69,29 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --allow-root \
         --porcelain) # --porcelain devuelve solo el ID
 
-    echo "[+] Página 'Inicio' creada con ID: $HOME_PAGE_ID"
+    if [ -n "$HOME_PAGE_ID" ]; then
+        echo "[+] Página 'Inicio' creada con ID: $HOME_PAGE_ID"
+    else
+        echo "[!] ERROR: No se pudo crear la página 'Inicio'. El ID está vacío."
+    fi
+
 
     # 3. Configurar WordPress para que 'Inicio' sea la página de inicio estática
-    echo "[+] Estableciendo la página 'Inicio' como página de inicio estática..."
+    echo "[+] Estableciendo la página 'Inicio' como página de inicio estática (show_on_front)..."
     wp option update show_on_front 'page' --allow-root
-    wp option update page_on_front $HOME_PAGE_ID --allow-root
+    echo "[+] Estableciendo la página 'Inicio' como página de inicio estática (page_on_front)..."
+    if [ -n "$HOME_PAGE_ID" ]; then
+        wp option update page_on_front $HOME_PAGE_ID --allow-root
+    else
+        echo "[!] ADVERTENCIA: No se pudo establecer page_on_front porque el ID de la página 'Inicio' no se obtuvo."
+    fi
+
 
     # 4. Configurar permalinks a un formato amigable (ej. /%postname%/)
     echo "[+] Configurando permalinks amigables..."
     wp rewrite structure '/%postname%/' --allow-root
     wp rewrite flush --allow-root # Esto es importante para que los cambios de permalink surtan efecto
+    echo "[+] Permalinks configurados y refrescados."
 
     echo "[+] Configuración inicial de la web completada."
     # --- FIN DE PERSONALIZACIÓN DE LA WEB ---
