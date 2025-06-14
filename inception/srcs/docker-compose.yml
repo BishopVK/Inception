@@ -24,8 +24,6 @@ services:
     volumes:
     #  - mariadb_data:/var/lib/mysql
       - /home/danjimen/data/mariadb:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
     networks:
       - inception
     env_file:
