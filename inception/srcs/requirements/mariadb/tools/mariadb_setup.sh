@@ -10,6 +10,8 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     # Comando para inicializar MariaDB. Esto crea las tablas del sistema.
     mysql_install_db --user=mysql --datadir=/var/lib/mysql --auth-root-authentication-method=normal
     echo "[+] Base de datos MariaDB inicializada."
+else
+    echo "[+] Base de datos MariaDB ya existente. Saltando inicialización."
 fi
 
 
@@ -37,5 +39,8 @@ else
 fi
 
 
-# Mantiene el contenedor vivo
-tail -f /dev/null
+# Mantiene el contenedor vivo (reemplazo de tail -f /dev/null)
+echo "[+] Setup de MariaDB completado. Manteniendo el contenedor activo..."
+while true; do
+    sleep 1
+done
