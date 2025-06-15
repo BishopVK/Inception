@@ -33,3 +33,24 @@ fclean:
 	docker image prune -af
 	docker volume prune -f
 	sudo rm -rf /home/danjimen/data/
+	docker volume rm srcs_mariadb_data srcs_wordpress_data || true
+
+volumes:
+	docker volume ls
+	docker volume inspect srcs_mariadb_data
+	docker volume inspect srcs_wordpress_data
+
+status:
+	@echo "🟦 Docker containers:"
+	@docker ps -a --filter name=nginx --filter name=wordpress --filter name=mariadb
+
+	@echo "\n🟩 Docker volumes:"
+	@docker volume ls | grep -E 'mariadb_data|wordpress_data' || echo "No volumes found"
+
+	@echo "\n🟨 Docker volume paths:"
+	@echo "MariaDB:    /home/danjimen/data/mariadb"
+	@echo "WordPress:  /home/danjimen/data/wordpress"
+	@sudo ls -l /home/danjimen/data/
+
+	@echo "\n🟪 Docker network:"
+	@docker network ls | grep inception || echo "No network found"
