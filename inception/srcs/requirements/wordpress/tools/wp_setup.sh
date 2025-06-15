@@ -34,7 +34,7 @@ wp config create \
 
 wp core install \
   --url="$DOMAIN_NAME" \
-  --title="Inception" \
+  --title="danjimen's Inception" \
   --admin_user="$WP_USER" \
   --admin_password="$WP_PASSWORD" \
   --admin_email="$WP_EMAIL" \
